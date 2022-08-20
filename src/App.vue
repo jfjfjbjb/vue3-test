@@ -1,5 +1,5 @@
 <script lang="jsx" setup>
-import { reactive, computed, h, getCurrentInstance } from 'vue';
+import { reactive, computed, h, getCurrentInstance, onMounted } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 // import VNode from './components/VNode.jsx'
@@ -19,6 +19,11 @@ const testStoreCounter = computed(() => {
   return uc.$state.counter;
 })
 
+// life circle
+onMounted(() => {
+  console.log(proxy);
+})
+
 // methods
 function onTestPlus() {
   uc.increment();
@@ -34,7 +39,7 @@ function getJSX(h) {
     <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld ref="hd" msg="You did it!" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -44,7 +49,7 @@ function getJSX(h) {
   </header>
 
   <div>
-    <VNodeTest />
+    <VNodeTest ref="vt" />
     <VNode :node="getJSX" />
     <VNode :node="jsxConfig.getJSX" />
     <div>test {{ testStoreCounter }}</div>
