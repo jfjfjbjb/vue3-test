@@ -1,5 +1,5 @@
 <script lang="jsx" setup>
-import { reactive, computed, h, getCurrentInstance, onMounted } from 'vue';
+import { reactive, ref, computed, h, getCurrentInstance, onMounted } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 // import VNode from './components/VNode.jsx'
@@ -8,20 +8,21 @@ import { useCounterStore } from './stores/counter';
 import config from './components/config.jsx';
 const uc = useCounterStore();
 const { proxy } = getCurrentInstance();
+const self = {};
 
 // console.log(this, proxy);
 // refs
 const state = reactive({ count: 0 });
-const jsxConfig = reactive(config(proxy));
+const jsxConfig = reactive(config(self));
 
 // computed
 const testStoreCounter = computed(() => {
-  return uc.$state.counter;
+  return uc.counter;
 })
 
 // life circle
 onMounted(() => {
-  console.log(proxy);
+  console.log(proxy, uc.counter);
 })
 
 // methods
@@ -31,11 +32,22 @@ function onTestPlus() {
 function getJSX(h) {
   return <div>本文件获取jsx</div>
 }
+function tempFunc() {
+  return '模板方法'
+}
+
+self.state = state;
+self.tempFunc = tempFunc;
+// const expose = {
+//   state
+// }
+// defineExpose
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/M.png" width="125" height="125" />
     <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg" width="125" height="125" />
 
     <div class="wrapper">
@@ -49,16 +61,29 @@ function getJSX(h) {
   </header>
 
   <div>
+    {{ tempFunc() }}
     <VNodeTest ref="vt" />
     <VNode :node="getJSX" />
     <VNode :node="jsxConfig.getJSX" />
-    <div>test {{ testStoreCounter }}</div>
-    <button @click="onTestPlus">添加+</button>
+    <div class="color-purple">test {{ testStoreCounter }}</div>
+    <button class="color-green" @click="onTestPlus">添加+</button>
   </div>
 
   <RouterView />
 </template>
 
+<style scoped lang="less">
+@color: purple;
+
+.color-purple {
+  color: @color;
+  .font-bold();
+}
+
+.color-green {
+  color: @color-green;
+}
+</style>
 <style scoped>
 header {
   line-height: 1.5;

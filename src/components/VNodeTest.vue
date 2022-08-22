@@ -2,12 +2,16 @@
 export default {
   data() {
     return {
-      greeting: '单个组件jsx'
+      greeting: '单个组件jsx',
+      filterTest: 'mmmmmm'
     }
   },
   methods: {
     getJSX(h) {
       return <div>jsx部分</div>
+    },
+    tempFunc(val) {
+      return val + '-dfkdjfkdjkf'
     }
   }
 }
@@ -16,6 +20,7 @@ export default {
 <template>
   <p class="greeting">{{ greeting }}</p>
   <VNode :node="getJSX" />
+  <!-- <div>{{ tempFunc(filterTest) }}</div> -->
 </template>
 
 <style>

@@ -6,6 +6,8 @@ import router from './router'
 import VNode from './components/VNode'
 
 import './assets/main.css'
+// import './assets/style/index.css'
+import './assets/style/index.less'
 
 const app = createApp(App)
 
