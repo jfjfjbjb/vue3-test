@@ -6,6 +6,10 @@ import HelloWorld from './components/HelloWorld.vue'
 import VNodeTest from './components/VNodeTest.vue'
 import { useCounterStore } from './stores/counter';
 import config from './components/config.jsx';
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
 const uc = useCounterStore();
 const { proxy } = getCurrentInstance();
 const self = {};
@@ -14,6 +18,9 @@ const self = {};
 // refs
 const state = reactive({ count: 0 });
 const jsxConfig = reactive(config(self));
+const locale = reactive(zhCN);
+const date = ref();
+const year = ref();
 
 // computed
 const testStoreCounter = computed(() => {
@@ -35,6 +42,9 @@ function getJSX(h) {
 function tempFunc() {
   return '模板方法'
 }
+function logDate(e) {
+  console.log(e, date.value, year.value, 'date log');
+}
 
 self.state = state;
 self.tempFunc = tempFunc;
@@ -45,31 +55,40 @@ self.tempFunc = tempFunc;
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-    <img alt="Vue logo" class="logo" src="@/assets/M.png" width="125" height="125" />
-    <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg" width="125" height="125" />
+  <a-config-provider :locale="locale">
+    <header>
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+      <img alt="Vue logo" class="logo" src="@/assets/M.png" width="125" height="125" />
+      <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld ref="hd" msg="You did it!" />
+      <div class="wrapper">
+        <HelloWorld ref="hd" msg="You did it!" />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+        </nav>
+      </div>
+    </header>
+
+    <div>
+      {{ tempFunc() }}
+      <VNodeTest ref="vt" />
+      <VNode :node="getJSX" />
+      <VNode :node="jsxConfig.getJSX" />
+      <div class="color-purple">test {{ testStoreCounter }}</div>
+      <button class="color-green" @click="onTestPlus">添加+</button>
+      <a-divider />
+      <a-button>这是antd的button5555</a-button>
+      <a-button>hello</a-button>
+      {{date}}
+      <a-date-picker v-model:value="date" valueFormat="YYYY-MM-DD"  @change="logDate" />
+      <a-date-picker v-model:value="year" picker="year" @change="logDate"/>
     </div>
-  </header>
 
-  <div>
-    {{ tempFunc() }}
-    <VNodeTest ref="vt" />
-    <VNode :node="getJSX" />
-    <VNode :node="jsxConfig.getJSX" />
-    <div class="color-purple">test {{ testStoreCounter }}</div>
-    <button class="color-green" @click="onTestPlus">添加+</button>
-  </div>
+    <RouterView />
+  </a-config-provider>
 
-  <RouterView />
 </template>
 
 <style scoped lang="less">
