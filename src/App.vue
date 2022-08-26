@@ -2,6 +2,8 @@
 import { reactive, ref, computed, h, getCurrentInstance, onMounted } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import IconCommunity from './components/icons/IconCommunity.vue'
+import Input from '@/components/Input/index.vue';
 // import VNode from './components/VNode.jsx'
 import VNodeTest from './components/VNodeTest.vue'
 import { useCounterStore } from './stores/counter';
@@ -21,6 +23,8 @@ const jsxConfig = reactive(config(self));
 const locale = reactive(zhCN);
 const date = ref();
 const year = ref();
+const inputAttrs = ref({})
+const inputValue = ref();
 
 // computed
 const testStoreCounter = computed(() => {
@@ -36,6 +40,9 @@ onMounted(() => {
 function onTestPlus() {
   uc.increment();
 }
+function onCompTest() {
+  inputAttrs.value.placeholder = '时刻提防' + Math.random();
+}
 function getJSX(h) {
   return <div>本文件获取jsx</div>
 }
@@ -43,11 +50,13 @@ function tempFunc() {
   return '模板方法'
 }
 function logDate(e) {
+  $message.success(date.value);
   console.log(e, date.value, year.value, 'date log');
 }
 
 self.state = state;
 self.tempFunc = tempFunc;
+
 // const expose = {
 //   state
 // }
@@ -60,18 +69,14 @@ self.tempFunc = tempFunc;
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
       <img alt="Vue logo" class="logo" src="@/assets/M.png" width="125" height="125" />
       <img alt="Vue logo" class="logo" src="@/assets/oceanbase.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld ref="hd" msg="You did it!" />
-
-        <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav>
-      </div>
     </header>
 
     <div>
+      <HelloWorld>456454546</HelloWorld>
+    </div>
+
+    <div>
+      <IconCommunity />
       {{ tempFunc() }}
       <VNodeTest ref="vt" />
       <VNode :node="getJSX" />
@@ -79,11 +84,12 @@ self.tempFunc = tempFunc;
       <div class="color-purple">test {{ testStoreCounter }}</div>
       <button class="color-green" @click="onTestPlus">添加+</button>
       <a-divider />
-      <a-button>这是antd的button5555</a-button>
-      <a-button>hello</a-button>
-      {{date}}
-      <a-date-picker v-model:value="date" valueFormat="YYYY-MM-DD"  @change="logDate" />
-      <a-date-picker v-model:value="year" picker="year" @change="logDate"/>
+      <a-button @click="onCompTest">hello</a-button>
+      {{ date }}
+      <a-date-picker v-model:value="date" valueFormat="YYYY-MM-DD" @change="logDate" />
+      <a-date-picker v-model:value="year" picker="year" @change="logDate" />
+      <Input style="width:200px;" v-model="inputValue" placeholder="rrrrr" v-bind="inputAttrs" />
+      <span>{{inputValue}}</span>
     </div>
 
     <RouterView />
@@ -101,68 +107,5 @@ self.tempFunc = tempFunc;
 
 .color-green {
   color: @color-green;
-}
-</style>
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>

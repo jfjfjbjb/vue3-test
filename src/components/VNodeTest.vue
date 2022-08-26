@@ -1,6 +1,10 @@
 <script lang='jsx'>
 export default {
+  // setup(props, context) {
+  //   console.log(props, context)
+  // },
   data() {
+    // this.$message.error('data')
     return {
       greeting: '单个组件jsx',
       filterTest: 'mmmmmm'
