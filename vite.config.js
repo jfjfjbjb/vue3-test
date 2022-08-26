@@ -1,8 +1,8 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcssPresetEnv from 'postcss-preset-env';
 import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
@@ -14,7 +14,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     Components({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver()]
     })
   ],
   resolve: {
@@ -24,15 +24,13 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [
-        postcssPresetEnv
-      ]
+      plugins: [postcssPresetEnv]
     },
     preprocessorOptions: {
       less: {
         charset: false,
-        additionalData: '@import "./src/assets/style/index.less";',
+        additionalData: '@import "./src/assets/style/index.less";'
       }
     }
   }
-})
+});

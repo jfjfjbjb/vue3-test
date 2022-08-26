@@ -5,16 +5,16 @@ defineProps({
   msg: {
     type: String
   }
-})
+});
 
 function getValue() {
-  return 'test ref'
+  return 'test ref';
 }
 
 // 抛出去，ref可以使用 [git]
 defineExpose({
   getValue
-})
+});
 </script>
 
 <template>

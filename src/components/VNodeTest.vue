@@ -1,4 +1,4 @@
-<script lang='jsx'>
+<script lang="jsx">
 export default {
   // setup(props, context) {
   //   console.log(props, context)
@@ -8,17 +8,17 @@ export default {
     return {
       greeting: '单个组件jsx',
       filterTest: 'mmmmmm'
-    }
+    };
   },
   methods: {
     getJSX(h) {
-      return <div>jsx部分</div>
+      return <div>jsx部分</div>;
     },
     tempFunc(val) {
-      return val + '-dfkdjfkdjkf'
+      return val + '-dfkdjfkdjkf';
     }
   }
-}
+};
 </script>
 
 <template>
