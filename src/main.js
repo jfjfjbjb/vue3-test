@@ -19,8 +19,8 @@ app.use(createPinia());
 app.use(router);
 // app.use(Antd)
 app.config.globalProperties.$message = message;
-globalThis.$message = message;
-globalThis._ = _;
+window.$message = message;
+window._ = _;
 // message.info('This is a normal message');
 
 app.component('VNode', VNode);
