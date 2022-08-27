@@ -1,6 +1,6 @@
 <script lang="jsx" setup>
-import { reactive, ref, computed, h, getCurrentInstance, onMounted } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { reactive, ref, computed, getCurrentInstance, onMounted } from 'vue';
+import { RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
 import IconCommunity from './components/icons/IconCommunity.vue';
 import Input from '@/components/Input/index.vue';
@@ -50,7 +50,7 @@ function tempFunc() {
   return '模板方法';
 }
 function logDate(e) {
-  $message.success(date.value);
+  window.$message.success(date.value);
   console.log(e, date.value, year.value, 'date log');
 }
 

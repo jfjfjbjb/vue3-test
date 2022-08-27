@@ -9,13 +9,17 @@ module.exports = {
     // '@vue/eslint-config-prettier'
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    ecmaFeatures: {
+      jsx: true
+    },
+    sourceType: 'module'
   },
   rules: {
     'quotes': ['error', 'single'],
     // 'quote-props': ['error', 'as-needed'],
     'jsx-quotes': ['error', 'prefer-single'],
-    'vue/multi-word-component-names': 0,
-    'no-unused-vars': ['error', { args: 'none' }]
+    'no-unused-vars': ['error', { args: 'none' }],
+    'vue/multi-word-component-names': 0
   }
 };
