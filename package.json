@@ -2,10 +2,12 @@
   "name": "vue3-test",
   "version": "0.0.0",
   "scripts": {
+    "start": "npm run dev",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run lint && vite build",
     "preview": "vite preview --port 4173",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",
+    "lint-fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "ant-design-vue": "^3.2.11",
@@ -18,13 +20,14 @@
     "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "^8.21.0",
+    "eslint": "^8.23.0",
     "eslint-plugin-vue": "^9.3.0",
     "less": "^3.7.1",
     "postcss": "^8.4.16",
     "postcss-preset-env": "^7.8.0",
     "prettier": "^2.7.1",
     "unplugin-vue-components": "^0.22.4",
-    "vite": "^3.0.4"
+    "vite": "^3.0.4",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }
