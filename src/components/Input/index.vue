@@ -3,7 +3,8 @@ import { useAttrs, computed } from 'vue';
 
 defineProps({
   msg: {
-    type: String
+    type: String,
+      
   },
   modelValue: String
 });
