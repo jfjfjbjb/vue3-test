@@ -7,18 +7,6 @@
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "prettier --config .prettierrc.js --write",
-      "eslint",
-      "git add"
-    ]
-  },
   "dependencies": {
     "ant-design-vue": "^3.2.11",
     "pinia": "^2.0.17",
@@ -32,9 +20,7 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.21.0",
     "eslint-plugin-vue": "^9.3.0",
-    "husky": "^8.0.1",
     "less": "^3.7.1",
-    "lint-staged": "^13.0.3",
     "postcss": "^8.4.16",
     "postcss-preset-env": "^7.8.0",
     "prettier": "^2.7.1",

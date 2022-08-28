@@ -4,12 +4,10 @@ import { useAttrs, computed } from 'vue';
 defineProps({
   msg: {
     type: String,
-      
   },
   modelValue: String
 });
 defineEmits(['update:modelValue']);
-var a;
 
 const defaultAttrs = {
   placeholder: '请输入...'
