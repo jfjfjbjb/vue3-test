@@ -1,4 +1,5 @@
 <script lang="jsx" setup>
+import { apiGet, apiPost, apiText } from '@/api/test';
 import { reactive, ref, computed, getCurrentInstance, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
@@ -15,6 +16,7 @@ dayjs.locale('zh-cn');
 const uc = useCounterStore();
 const { proxy } = getCurrentInstance();
 const self = {};
+// const TEST_CASE = '1111';
 
 // console.log(this, proxy);
 // refs
@@ -34,11 +36,38 @@ const testStoreCounter = computed(() => {
 // life circle
 onMounted(() => {
   console.log(proxy, uc.counter);
+  // get请求
+  apiGet({ a: 111 })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  // post请求
+  apiPost({ b: 222 })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  // post请求
+  apiText({ c: 333 })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 });
 
 // methods
 function onTestPlus() {
   uc.increment();
+  state.count += 1;
 }
 function onCompTest() {
   inputAttrs.value.placeholder = '时刻提防' + Math.random();
@@ -99,7 +128,9 @@ self.tempFunc = tempFunc;
       <VNodeTest ref="vt" />
       <VNode :node="getJSX" />
       <VNode :node="jsxConfig.getJSX" />
-      <div class="color-purple">test {{ testStoreCounter }}</div>
+      <div class="color-purple">
+        testPinia {{ testStoreCounter }} test {{ state.count }}
+      </div>
       <button class="color-green" @click="onTestPlus">添加+</button>
       <a-divider />
       <a-button @click="onCompTest">hello</a-button>
