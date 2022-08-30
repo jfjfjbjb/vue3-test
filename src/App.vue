@@ -124,7 +124,7 @@ self.tempFunc = tempFunc;
       />
     </header>
 
-    <div>
+    <div class="bg-img">
       <HelloWorld>456454546</HelloWorld>
     </div>
 
@@ -170,5 +170,10 @@ self.tempFunc = tempFunc;
 
 .color-green {
   color: @color-green;
+}
+
+.bg-img {
+  background-image: url('@/assets/oceanbase.svg');
+  background-repeat: no-repeat;
 }
 </style>

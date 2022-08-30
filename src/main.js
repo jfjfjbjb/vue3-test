@@ -9,10 +9,10 @@ import { message } from 'ant-design-vue';
 import 'ant-design-vue/es/message/style/css';
 import mitt from 'mitt';
 
-// import './assets/main.css'
+import './assets/main.css';
 // import './assets/style/index.css'
 // import 'ant-design-vue/dist/antd.css';
-import './assets/style/index.less';
+import './style/index.less';
 
 const app = createApp(App);
 
