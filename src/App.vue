@@ -62,12 +62,18 @@ onMounted(() => {
     .catch((e) => {
       console.log(e);
     });
+
+  // 监听事件
+  window.$bus.on('event-test', (data) => {
+    console.log('evt: ', data);
+  });
 });
 
 // methods
 function onTestPlus() {
   uc.increment();
   state.count += 1;
+  window.$bus.emit('event-test', state.count);
 }
 function onCompTest() {
   inputAttrs.value.placeholder = '时刻提防' + Math.random();

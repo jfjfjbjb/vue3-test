@@ -21,5 +21,8 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'no-unused-vars': ['error', { args: 'none' }],
     'vue/multi-word-component-names': 0
+  },
+  globals: {
+    _: 'readonly'
   }
 };
