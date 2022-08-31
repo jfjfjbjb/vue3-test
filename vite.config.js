@@ -8,6 +8,7 @@ import postcssPresetEnv from 'postcss-preset-env';
 import { viteMockServe } from 'vite-plugin-mock';
 import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import svgLoader from 'vite-svg-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -23,6 +24,7 @@ export default defineConfig(({ command, mode }) => {
       eslint({
         cache: false
       }),
+      svgLoader(),
       Components({
         resolvers: [AntDesignVueResolver()]
       })

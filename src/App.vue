@@ -12,6 +12,8 @@ import config from './components/config.jsx';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
+import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+
 dayjs.locale('zh-cn');
 const uc = useCounterStore();
 const { proxy } = getCurrentInstance();
@@ -104,7 +106,7 @@ self.tempFunc = tempFunc;
       <img
         alt="Vue logo"
         class="logo"
-        src="@/assets/logo.svg"
+        src="@/assets/logo.svg?url"
         width="125"
         height="125"
       />
@@ -115,10 +117,11 @@ self.tempFunc = tempFunc;
         width="125"
         height="125"
       />
+      <OceanbaseIcon width="125" height="125" />
       <img
         alt="Vue logo"
         class="logo"
-        src="@/assets/oceanbase.svg"
+        src="@/assets/oceanbase.svg?url"
         width="125"
         height="125"
       />
