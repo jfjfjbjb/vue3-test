@@ -4,7 +4,7 @@ import { reactive, ref, computed, getCurrentInstance, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
 import IconCommunity from './components/icons/IconCommunity.vue';
-import Input from '@/components/Input/index.vue';
+// import Input from '@/components/Input/index.vue';
 // import VNode from './components/VNode.jsx'
 import VNodeTest from './components/VNodeTest.vue';
 import { useCounterStore } from './stores/counter';
@@ -150,7 +150,7 @@ self.tempFunc = tempFunc;
         @change="logDate"
       />
       <a-date-picker v-model:value="year" picker="year" @change="logDate" />
-      <Input
+      <custom-input
         style="width: 200px"
         v-model="inputValue"
         placeholder="rrrrr"

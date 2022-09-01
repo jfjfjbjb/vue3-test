@@ -23,6 +23,8 @@ module.exports = {
     'vue/multi-word-component-names': 0
   },
   globals: {
-    _: 'readonly'
+    _: 'readonly',
+    $message: 'readonly',
+    $bus: 'readonly'
   }
 };
