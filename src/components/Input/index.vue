@@ -2,9 +2,6 @@
 import { useAttrs, computed } from 'vue';
 
 defineProps({
-  msg: {
-    type: String,
-  },
   modelValue: String
 });
 defineEmits(['update:modelValue']);
@@ -28,13 +25,11 @@ defineExpose({
 </script>
 
 <template>
-  <div>
-    <a-input
-      v-bind="attrs"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    ></a-input>
-  </div>
+  <a-input
+    v-bind="attrs"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  ></a-input>
 </template>
 
 <style scoped lang="less"></style>

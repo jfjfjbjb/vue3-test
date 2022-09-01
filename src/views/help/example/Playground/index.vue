@@ -26,62 +26,58 @@
       </div>
     </a-card>
 
-    <div class="bg-img">
-      <HelloWorld>456454546</HelloWorld>
-    </div>
-
-    <div>
-      <IconCommunity />
-      {{ tempFunc() }}
-      <VNodeTest ref="vt" />
+    <a-card title="jsx使用">
       <VNode :node="getJSX" />
-      <VNode :node="jsxConfig.getJSX" />
-      <div class="color-purple">
-        testPinia {{ testStoreCounter }} test {{ state.count }}
-      </div>
-      <button class="color-green" @click="onTestPlus">添加+</button>
-      <a-divider />
-      <a-button @click="onCompTest">hello</a-button>
-      {{ date }}
-      <a-date-picker
-        v-model:value="date"
-        valueFormat="YYYY-MM-DD"
-        @change="logDate"
-      />
-      <a-date-picker v-model:value="year" picker="year" @change="logDate" />
-      <custom-input
-        style="width: 200px"
-        v-model="inputValue"
-        placeholder="rrrrr"
-        v-bind="inputAttrs"
-      />
-      <span>{{ inputValue }}</span>
-    </div>
+      <VNode :node="cfg.getJSX" />
+    </a-card>
 
-    <RouterView />
+    <a-card title="pinia和ref测试">
+      <div class="color-purple">
+        <div>testPinia: {{ testStoreCounter }}</div>
+        <div>test: {{ state.count }}</div>
+        <button class="color-green" @click="onTestPlus">添加+</button>
+      </div>
+    </a-card>
+
+    <a-card title="表单项初测">
+      <div>
+        {{ date }}
+        <a-date-picker
+          v-model:value="date"
+          valueFormat="YYYY-MM-DD"
+          @change="logDate"
+        />
+        <a-date-picker v-model:value="year" picker="year" @change="logDate" />
+      </div>
+      <a-divider />
+      <div>
+        <a-button @click="onCompTest">修改placeholder</a-button>
+        <custom-input
+          style="width: 200px"
+          v-model="inputValue"
+          placeholder="rrrrr"
+          v-bind="inputAttrs"
+        />
+        <span>{{ inputValue }}</span>
+      </div>
+    </a-card>
   </div>
 </template>
 
 <script lang="jsx" setup>
 import { apiGet, apiPost, apiText } from '@/api/test';
 import { reactive, ref, computed, getCurrentInstance, onMounted } from 'vue';
-import { RouterView } from 'vue-router';
-import HelloWorld from '@/components/HelloWorld.vue';
-import IconCommunity from '@/components/icons/IconCommunity.vue';
-import VNodeTest from '@/components/VNodeTest.vue';
 import { useCounterStore } from '@/stores/counter';
-import config from '@/components/config.jsx';
 import OceanbaseIcon from '@/assets/oceanbase.svg?component';
+import config from './config.jsx';
 
-const uc = useCounterStore();
 const { proxy } = getCurrentInstance();
+const uc = useCounterStore();
 const self = {};
-// const TEST_CASE = '1111';
 
-// console.log(this, proxy);
 // refs
 const state = reactive({ count: 0 });
-const jsxConfig = reactive(config(self));
+const cfg = reactive(config(self));
 const date = ref();
 const year = ref();
 const inputAttrs = ref({});
@@ -129,6 +125,13 @@ onMounted(() => {
 });
 
 // methods
+function getJSX(h) {
+  return (
+    <div>
+      1、本文件获取 <b style='color: blue;'>jsx</b>
+    </div>
+  );
+}
 function onTestPlus() {
   uc.increment();
   state.count += 1;
@@ -137,19 +140,12 @@ function onTestPlus() {
 function onCompTest() {
   inputAttrs.value.placeholder = '时刻提防' + Math.random();
 }
-function getJSX(h) {
-  return <div>本文件获取jsx</div>;
-}
-function tempFunc() {
-  return '模板方法';
-}
 function logDate(e) {
   window.$message.success(date.value);
   console.log(e, date.value, year.value, 'date log');
 }
 
 self.state = state;
-self.tempFunc = tempFunc;
 
 // const expose = {
 //   state
@@ -159,6 +155,10 @@ self.tempFunc = tempFunc;
 
 <style scoped lang="less">
 @color: purple;
+
+.ant-card {
+  margin-bottom: 1rem;
+}
 
 .color-purple {
   color: @color;

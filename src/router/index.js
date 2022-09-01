@@ -13,7 +13,7 @@ const router = createRouter({
       path: '/',
       name: 'root',
       component: Layout,
-      redirect: '/home',
+      redirect: '/help',
       children: [
         {
           path: '/home',
