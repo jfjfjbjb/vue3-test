@@ -1,7 +1,7 @@
 <template>
   <a-layout class="page-help" style="min-height: 100vh">
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
-      <div class="logo" />
+      <div class="logo"><Logo /></div>
       <a-menu
         v-model:openKeys="openKeys"
         v-model:selectedKeys="selectedKeys"
@@ -23,7 +23,7 @@
         <!-- private -->
       </a-menu>
     </a-layout-sider>
-    <a-layout style="padding: 24px;">
+    <a-layout style="padding: 24px">
       <component :is="activeExample" />
     </a-layout>
   </a-layout>
@@ -31,6 +31,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import Logo from '@/assets/logo.svg?component';
 import { FireOutlined } from '@ant-design/icons-vue';
 import exampleComps from './example';
 
@@ -54,9 +55,17 @@ const activeExample = computed(() => {
 
 <style scoped lang="less">
 .page-help .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 32px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
+  background-image: linear-gradient(135deg, #0b2b18 10%, #022b6b 100%);
+
+  > svg {
+    height: 50%;
+  }
 }
 
 .site-layout .site-layout-background {

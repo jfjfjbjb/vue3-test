@@ -1,13 +1,6 @@
 <template>
   <div class="example-playground">
-    <header>
-      <img
-        alt="Vue logo"
-        class="logo"
-        src="@/assets/logo.svg?url"
-        width="125"
-        height="125"
-      />
+    <a-card title="图片使用">
       <img
         alt="Vue logo"
         class="logo"
@@ -15,7 +8,6 @@
         width="125"
         height="125"
       />
-      <OceanbaseIcon width="125" height="125" />
       <img
         alt="Vue logo"
         class="logo"
@@ -23,7 +15,16 @@
         width="125"
         height="125"
       />
-    </header>
+      <OceanbaseIcon class="img" width="125" height="125" />
+      <div class="bg-img"></div>
+      <!-- suggest -->
+      <div class="suggest">
+        <div>1、普通图片（png,jpg,...），小图片build为base64</div>
+        <div>2、svg?url 【svg图片使用】</div>
+        <div>3、svg?component 【svg组件使用】</div>
+        <div>4、背景图使用</div>
+      </div>
+    </a-card>
 
     <div class="bg-img">
       <HelloWorld>456454546</HelloWorld>
@@ -170,7 +171,12 @@ self.tempFunc = tempFunc;
 }
 
 .bg-img {
+  width: 125px;
+  height: 125px;
+  display: inline-block;
   background-image: url('@/assets/oceanbase.svg');
   background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
 }
 </style>
