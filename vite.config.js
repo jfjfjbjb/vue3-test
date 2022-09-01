@@ -40,8 +40,9 @@ export default defineConfig(({ command, mode }) => {
       },
       preprocessorOptions: {
         less: {
+          javascriptEnabled: true,
           charset: false,
-          additionalData: '@import "./src/style/index.less";'
+          additionalData: '@import "./src/style/var.less";'
         }
       }
     },

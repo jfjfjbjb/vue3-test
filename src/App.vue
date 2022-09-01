@@ -169,6 +169,7 @@ self.tempFunc = tempFunc;
 .color-purple {
   color: @color;
   .font-bold();
+  font-size: @font-size-lg;
 }
 
 .color-green {
