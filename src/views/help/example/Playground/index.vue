@@ -163,10 +163,6 @@ function onChangeAnchor(currentActiveLink) {
   }
 }
 self.state = state;
-// const expose = {
-//   state
-// }
-// defineExpose
 </script>
 
 <style scoped lang="less">
