@@ -1,66 +1,79 @@
 <template>
-  <div class="example-playground">
-    <a-card title="图片使用">
-      <img
-        alt="Vue logo"
-        class="logo"
-        src="@/assets/M.png"
-        width="125"
-        height="125"
-      />
-      <img
-        alt="Vue logo"
-        class="logo"
-        src="@/assets/oceanbase.svg?url"
-        width="125"
-        height="125"
-      />
-      <OceanbaseIcon class="img" width="125" height="125" />
-      <div class="bg-img"></div>
-      <!-- suggest -->
-      <div class="suggest">
-        <div>1、普通图片（png,jpg,...），小图片build为base64</div>
-        <div>2、svg?url 【svg图片使用】</div>
-        <div>3、svg?component 【svg组件使用】</div>
-        <div>4、背景图使用</div>
-      </div>
-    </a-card>
-
-    <a-card title="jsx使用">
-      <VNode :node="getJSX" />
-      <VNode :node="cfg.getJSX" />
-    </a-card>
-
-    <a-card title="pinia和ref测试">
-      <div class="color-purple">
-        <div>testPinia: {{ testStoreCounter }}</div>
-        <div>test: {{ state.count }}</div>
-        <button class="color-green" @click="onTestPlus">添加+</button>
-      </div>
-    </a-card>
-
-    <a-card title="表单项初测">
-      <div>
-        {{ date }}
-        <a-date-picker
-          v-model:value="date"
-          valueFormat="YYYY-MM-DD"
-          @change="logDate"
+  <div class="example-content example-playground">
+    <div class="examples">
+      <a-card title="图片使用" id="example-playground-imgs">
+        <img
+          alt="Vue logo"
+          class="logo"
+          src="@/assets/M.png"
+          width="125"
+          height="125"
         />
-        <a-date-picker v-model:value="year" picker="year" @change="logDate" />
-      </div>
-      <a-divider />
-      <div>
-        <a-button @click="onCompTest">修改placeholder</a-button>
-        <custom-input
-          style="width: 200px"
-          v-model="inputValue"
-          placeholder="rrrrr"
-          v-bind="inputAttrs"
+        <img
+          alt="Vue logo"
+          class="logo"
+          src="@/assets/oceanbase.svg?url"
+          width="125"
+          height="125"
         />
-        <span>{{ inputValue }}</span>
-      </div>
-    </a-card>
+        <OceanbaseIcon class="img" width="125" height="125" />
+        <div class="bg-img"></div>
+        <!-- suggest -->
+        <div class="suggest">
+          <div>1、普通图片（png,jpg,...），小图片build为base64</div>
+          <div>2、svg?url 【svg图片使用】</div>
+          <div>3、svg?component 【svg组件使用】</div>
+          <div>4、背景图使用</div>
+        </div>
+      </a-card>
+
+      <a-card title="jsx使用" id="example-playground-jsx">
+        <VNode :node="getJSX" />
+        <VNode :node="cfg.getJSX" />
+      </a-card>
+
+      <a-card title="pinia测试" id="example-playground-pinia">
+        <div class="color-purple">
+          <div>testPinia: {{ testStoreCounter }}</div>
+          <div>test: {{ state.count }}</div>
+          <a-button class="color-green" @click="onTestPlus">添加+</a-button>
+        </div>
+      </a-card>
+
+      <a-card title="表单项初测" id="example-playground-form">
+        <div>
+          {{ date }}
+          <a-date-picker
+            v-model:value="date"
+            valueFormat="YYYY-MM-DD"
+            @change="logDate"
+          />
+          <a-date-picker v-model:value="year" picker="year" @change="logDate" />
+        </div>
+        <a-divider />
+        <div>
+          <a-button @click="onCompTest">修改placeholder</a-button>
+          <custom-input
+            style="width: 200px"
+            v-model="inputValue"
+            placeholder="rrrrr"
+            v-bind="inputAttrs"
+          />
+          <span>{{ inputValue }}</span>
+        </div>
+      </a-card>
+    </div>
+    <a-anchor
+      class="anchor"
+      :getCurrentAnchor="getCurrentAnchor"
+      @click="onClickAnchor"
+      @change="onChangeAnchor"
+    >
+      <a-anchor-link title="图片使用" href="#example-playground-imgs" />
+      <a-anchor-link title="jsx使用" href="#example-playground-jsx" />
+      <a-anchor-link title="pinia测试" href="#example-playground-pinia" />
+      <a-anchor-link title="表单项初测" href="#example-playground-form" />
+    </a-anchor>
   </div>
 </template>
 
@@ -82,6 +95,10 @@ const date = ref();
 const year = ref();
 const inputAttrs = ref({});
 const inputValue = ref();
+const activeAnchor = ref('#example-playground-imgs');
+const getCurrentAnchor = ref(() => {
+  return activeAnchor.value;
+});
 
 // computed
 const testStoreCounter = computed(() => {
@@ -144,6 +161,15 @@ function logDate(e) {
   window.$message.success(date.value);
   console.log(e, date.value, year.value, 'date log');
 }
+function onClickAnchor(e, link) {
+  e.preventDefault();
+  activeAnchor.value = link.href;
+}
+function onChangeAnchor(currentActiveLink) {
+  if (currentActiveLink) {
+    activeAnchor.value = currentActiveLink;
+  }
+}
 
 self.state = state;
 
@@ -155,10 +181,6 @@ self.state = state;
 
 <style scoped lang="less">
 @color: purple;
-
-.ant-card {
-  margin-bottom: 1rem;
-}
 
 .color-purple {
   color: @color;

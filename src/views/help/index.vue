@@ -7,6 +7,7 @@
         v-model:selectedKeys="selectedKeys"
         theme="dark"
         mode="inline"
+        @click="onClick"
       >
         <!-- common -->
         <a-sub-menu key="common">
@@ -43,6 +44,10 @@ const example = ref({
     {
       key: 'Playground',
       name: 'Playground'
+    },
+    {
+      key: 'Form',
+      name: 'Form'
     }
   ]
 });
@@ -51,20 +56,27 @@ const example = ref({
 const activeExample = computed(() => {
   return exampleComps[selectedKeys.value[0]];
 });
+
+// methods
+function onClick({ item, key, keyPath }) {
+  console.log(item, key, keyPath, 'click-menu-item');
+}
 </script>
 
 <style scoped lang="less">
-.page-help .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
-  background-image: linear-gradient(135deg, #0b2b18 10%, #022b6b 100%);
+.page-help {
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    background-image: linear-gradient(135deg, #0b2b18 10%, #022b6b 100%);
 
-  > svg {
-    height: 50%;
+    > svg {
+      height: 50%;
+    }
   }
 }
 
@@ -73,5 +85,26 @@ const activeExample = computed(() => {
 }
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
+}
+</style>
+
+<style lang="less">
+.example-content {
+  display: flex;
+
+  > div:first-child {
+    flex-grow: 1;
+  }
+
+  .anchor {
+    flex-shrink: 0;
+    padding: 0 8px;
+
+    .ant-anchor-wrapper {
+      .ant-anchor-ink::before {
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
 }
 </style>
