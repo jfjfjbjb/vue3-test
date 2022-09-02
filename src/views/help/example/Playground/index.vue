@@ -83,11 +83,9 @@ import { reactive, ref, computed, getCurrentInstance, onMounted } from 'vue';
 import { useCounterStore } from '@/stores/counter';
 import OceanbaseIcon from '@/assets/oceanbase.svg?component';
 import config from './config.jsx';
-
 const { proxy } = getCurrentInstance();
 const uc = useCounterStore();
 const self = {};
-
 // refs
 const state = reactive({ count: 0 });
 const cfg = reactive(config(self));
@@ -99,12 +97,10 @@ const activeAnchor = ref('#example-playground-imgs');
 const getCurrentAnchor = ref(() => {
   return activeAnchor.value;
 });
-
 // computed
 const testStoreCounter = computed(() => {
   return uc.counter;
 });
-
 // life circle
 onMounted(() => {
   console.log(proxy, uc.counter);
@@ -116,7 +112,6 @@ onMounted(() => {
     .catch((e) => {
       console.log(e);
     });
-
   // post请求
   apiPost({ b: 222 })
     .then((res) => {
@@ -125,7 +120,6 @@ onMounted(() => {
     .catch((e) => {
       console.log(e);
     });
-
   // post请求
   apiText({ c: 333 })
     .then((res) => {
@@ -134,13 +128,11 @@ onMounted(() => {
     .catch((e) => {
       console.log(e);
     });
-
   // 监听事件
   window.$bus.on('event-test', (data) => {
     console.log('evt: ', data);
   });
 });
-
 // methods
 function getJSX(h) {
   return (
@@ -170,9 +162,7 @@ function onChangeAnchor(currentActiveLink) {
     activeAnchor.value = currentActiveLink;
   }
 }
-
 self.state = state;
-
 // const expose = {
 //   state
 // }
@@ -181,17 +171,14 @@ self.state = state;
 
 <style scoped lang="less">
 @color: purple;
-
 .color-purple {
   color: @color;
   .font-bold();
   font-size: @font-size-lg;
 }
-
 .color-green {
   color: @color-green;
 }
-
 .bg-img {
   width: 125px;
   height: 125px;
